@@ -74,9 +74,7 @@ train_data, test_data = data.TabularDataset.splits(
                                         format = 'tsv',
                                         fields = fields,
                                         skip_header = True)
-
 train_data, valid_data = train_data.split(random_state=random.seed(SEED))
-
 print('Data loading complete')
 print(f"Number of training examples: {len(train_data)}")
 print(f"Number of validation examples: {len(valid_data)}")
@@ -191,7 +189,6 @@ def categorical_accuracy(preds, y):
 
     f1 = f1_score(y.detach().cpu().numpy(), predictions.detach().cpu().numpy(), average='macro')
     metric = torch.FloatTensor([count0 / true_correct[0], count1 / true_correct[1], count2 / true_correct[2], f1])
-
     return correct.sum() / torch.FloatTensor([y.shape[0]]), metric, confusion_matrix(y.detach().cpu().numpy(), max_preds.detach().cpu().numpy())
 
 
@@ -271,7 +268,7 @@ def epoch_time(start_time, end_time):
     return elapsed_mins, elapsed_secs
 
 
-N_EPOCHS = 2
+N_EPOCHS = 40
 
 best_f1 = [-1, -1]
 for epoch in range(N_EPOCHS):
