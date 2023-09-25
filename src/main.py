@@ -75,19 +75,6 @@ train_data, test_data = data.TabularDataset.splits(
                                         fields = fields,
                                         skip_header = True)
 
-# Reduce the size of the training dataset
-fraction = 0.5  # Fraction of the data to keep
-num_samples = 1000  # Number of samples to keep
-
-if fraction is not None:
-    # Randomly sample a fraction of the data
-    random.shuffle(train_data.examples)
-    num_samples = int(len(train_data) * fraction)
-    train_data.examples = train_data.examples[:num_samples]
-elif num_samples is not None:
-    # Keep a specific number of samples
-    train_data.examples = train_data.examples[:num_samples]
-
 train_data, valid_data = train_data.split(random_state=random.seed(SEED))
 
 print('Data loading complete')
